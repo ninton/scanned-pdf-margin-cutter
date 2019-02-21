@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+function read_filepath () {
+    prompt=$1
+    pat=$2
+
+    while [ true ]; do
+        read -p $prompt var
+        if [[ $var =~ $pat ]]; then
+            if [ "$var" == "" ]; then
+                break;
+            fi
+
+            var=${var/"~"/~}
+            echo $var >&2
+            if [ -f $var ]; then
+                break;
+            else
+                echo "ファイルが見つかりません" >&2
+            fi
+        else
+            echo "拡張子が違います" >&2
+        fi
+    done
+
+    echo $var
+}
+
+function read_boolean () {
+    prompt=$1
+    defval=$2
+
+    while [ true ]; do
+        read -p $prompt var
+        if [ "$var" == "" ]; then
+            var=$defval
+            break;
+        fi
+        if [[ $var =~ ^y|Y ]]; then
+            var=1
+            break;
+        fi
+        if [[ $var =~ ^n|N ]]; then
+            var=0
+            break;
+        fi
+    done
+
+    echo $var
+}
+
+function read_number () {
+    prompt=$1
+    pat=$2
+    defval=$3
+
+    while [ true ]; do
+        read -p $prompt var
+        if [[ $var =~ $pat ]]; then
+            break;
+        fi
+    done
+
+    if [ "$var" == "" ]; then
+        var=$defval
+    fi
+
+    echo $var
+}
+
+function read_params () {
+    front_pdf=`read_filepath "表示pdf(ないときはENTER):" "(|.+[.]pdf)" `
+    body_pdf=` read_filepath "本文pdf:" ".+[.]pdf"`
+    is_left_binding=`read_boolean "左綴じ(Yes|no)[Yes]:"  1`
+    if [ $is_left_binding == 1 ]; then
+        SIDE_MARGIN_LABEL=右余白
+    else
+        SIDE_MARGIN_LABEL=左余白
+    fi
+    top_mm=`   read_number "上余白(mm)[0]:" "|[1-9]+" 0`
+    side_mm=`  read_number "${SIDE_MARGIN_LABEL}""(mm)[0]:" "|[1-9]+" 0`
+    width_mm=` read_number "幅(mm):"   "[1-9]+" 0`
+    height_mm=`read_number "高さ(mm):" "[1-9]+" 0`
+}
+
+function echo_params () {
+    echo "表示pdf   : $front_pdf"
+    echo "本体df    : $body_pdf"
+    echo "左綴じ    : $is_left_binding"
+    echo "上余白(mm): $top_mm"
+    echo "${SIDE_MARGIN_LABEL}(mm): $side_mm"
+    echo "幅(mm)    : $width_mm"
+    echo "高さ(mm)  : $height_mm"
+}
+
+function confirm () {
+    ok=`read_boolean "OK(yes/no)[yes]"`
+    if [ "$ok" == 0 ]; then
+        exit
+    fi
+}
+
+function do_spmc_main () {
+    DPI=300
+    MM_PER_INCH=25.4
+    width_px=` echo "$width_mm  * $DPI / $MM_PER_INCH" | bc`
+    height_px=`echo "$height_mm * $DPI / $MM_PER_INCH" | bc`
+    top_px=`   echo "$top_mm    * $DPI / $MM_PER_INCH" | bc`
+    side_px=`  echo "$side_mm   * $DPI / $MM_PER_INCH" | bc`
+
+    set -x
+    spmc-main "$front_pdf" "$body_pdf" $is_left_binding $width_px $height_px $side_px $top_px
+}
+
+function main () {
+    read_params
+    echo_params
+    confirm
+    do_spmc_main
+}
+
+main
+

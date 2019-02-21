@@ -1,0 +1,27 @@
+#!/bin/bash
+
+dir=`dirname $0`
+
+pdf_1=$1
+pdf_2=$2
+is_left_binding=$3
+w=$4
+h=$5
+x=$6
+y=$7
+
+mkdir -p tmp
+rm -rf tmp/*
+
+$dir/spmc-split 2 $pdf_2
+$dir/spmc-cut ${is_left_binding} $w $h $x $y
+
+if [ "$pdf_1" != "" ]; then
+    $dir/spmc-split 1 $pdf_1
+    $dir/spmc-resize ${w}x${h}
+fi
+
+$dir/spmc-jpg2pdf
+$dir/spmc-join
+
+rm -rf tmp/*

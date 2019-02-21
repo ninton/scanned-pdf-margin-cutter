@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for jpg_path in $( ls tmp/dst_*.jpg ); do
+    pdf_path=${jpg_path/.jpg/.pdf}
+    echo convert $jpg_path $pdf_path
+    set -x
+    convert $jpg_path $pdf_path
+    set +x
+done

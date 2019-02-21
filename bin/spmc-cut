@@ -1,0 +1,27 @@
+#!/bin/bash
+
+is_left_binding=$1
+w=$2
+h=$3
+x=$4
+y=$5
+
+for src_jpg_path in $( ls tmp/src_2_*.jpg ); do
+    dst_jpg_path=${src_jpg_path/src_/dst_}
+
+    if [[ $src_jpg_path =~ [13579].jpg ]]; then
+        is_odd_page=1
+    else
+        is_odd_page=0
+    fi
+
+    if [ $is_left_binding == $is_odd_page ]; then
+        img_w=`identify $src_jpg_path | cut -d' ' -f3 | cut -dx -f1`
+        crop_x=$(($img_w - $w - $x))
+    else
+        crop_x=$x
+    fi
+    
+    echo convert "$src_jpg_path" -crop ${w}x${h}+${crop_x}+${y} "$dst_jpg_path"
+    convert "$src_jpg_path" -crop ${w}x${h}+${crop_x}+${y} "$dst_jpg_path"
+done

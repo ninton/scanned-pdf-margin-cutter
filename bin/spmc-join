@@ -1,0 +1,4 @@
+#!/bin/bash
+
+set -x
+pdftk `ls tmp/dst_*.pdf | sort` cat output output.pdf

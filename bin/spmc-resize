@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for src_jpg_path in $( ls tmp/src_1_*.jpg ); do
+    dst_jpg_path=${src_jpg_path/src_/dst_}
+    set -x
+    convert $src_jpg_path -geometry $1 $dst_jpg_path
+    set +x
+done

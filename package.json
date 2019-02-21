@@ -1,0 +1,21 @@
+{
+  "name": "scanned-pdf-margin-cutter",
+  "version": "0.1.8",
+  "description": "(developing) Command line tool: Cut out margins from the image data of the scanned pdf",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aoki_makoto@ninton.co.jp",
+  "bin": {
+    "spmc-main-prompt": "./bin/spmc-main-prompt",
+    "spmc-main": "./bin/spmc-main",
+    "spmc-split": "./bin/spmc-split",
+    "spmc-cut": "./bin/spmc-cut",
+    "spmc-resize": "./bin/spmc-resize",
+    "spmc-jpg2pdf": "./bin/spmc-jpg2pdf",
+    "spmc-join": "./bin/spmc-join"
+  },
+  "license": "ISC",
+  "dependencies": {}
+}

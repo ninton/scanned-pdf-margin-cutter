@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -x
+mkdir -p tmp
+gs -dBATCH -dNOPAUSE -sDEVICE=jpeg -r300 -sOutputFile=tmp/src_$1_%03d.jpg "$2"
+
