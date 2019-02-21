@@ -36,15 +36,19 @@
 
 中身をスキャンして、pdfに保存します。body.pdfとします。
 
-
-    $ spmc-main front.pdf body.pdf 1 1594 2126 177 236
-
-    $ spmc-main 表紙pdf 本体pdf 左綴じ 幅　高さ　上余白 綴じていない側の余白
-
-    左綴じ: 1=左綴じ、0=右綴じ
-    幅: ピクセル数、15mmなら15 / 25.4 x 300dpi = 177ピクセル
-    高さ: ピクセル数、180mmなら、180 / 25.4 x 300dpi = 2126ピクセル
-
-    綴じていない側の余白: ピクセル数、15mmなら、180 / 25.4 x 300dpi = 177ピクセル
-
-    上の余白: ピクセル数、20mmなら、180 / 25.4 x 300dpi = 236ピクセル
+    $ spmc-main-prompt
+    表示pdf(ないときはENTER):front.pdf
+    本文pdf:body.pdf
+    左綴じ(Yes|no)[Yes]:
+    上余白(mm)[0]:14
+    右余白(mm)[0]:10
+    幅(mm):155
+    高さ(mm):233
+    表示pdf   : front.pdf
+    本体df    : body.pdf
+    左綴じ    : 1
+    上余白(mm): 14
+    右余白(mm): 10
+    幅(mm)    : 155
+    高さ(mm)  : 233
+    OK(yes/no)[yes]
