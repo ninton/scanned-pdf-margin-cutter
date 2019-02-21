@@ -32,9 +32,9 @@
 
 ## 使い方
 
-表紙をスキャンして、pdfに保存します。front.pdfとします。
+表紙をスキャンして、pdfに保存します。front.pdfとします。このファイルは変更しません。
 
-中身をスキャンして、pdfに保存します。body.pdfとします。
+中身をスキャンして、pdfに保存します。body.pdfとします。このファイルは変更しません。
 
     $ spmc-main-prompt
     表示pdf(ないときはENTER):front.pdf
@@ -52,3 +52,5 @@
     幅(mm)    : 155
     高さ(mm)  : 233
     OK(yes/no)[yes]
+
+縮小した表紙と余白カットした中身を結合して、yyyy-mm-dd-HH-MM-SS.pdfが作成されます。
