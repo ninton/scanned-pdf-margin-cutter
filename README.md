@@ -8,18 +8,23 @@
 
 ## 必要なもの
 
++ bc
 + ImageMagick
 + GhostScript
 + PDFTK
 
-### Ubuntu
+### Ubuntu 16.04
 
-    $ sudo apt install imagemagick
-    $ sudo apt install ghostscript
-    $ sudo apt install pdftk
+    $ sudo apt-get install bc
+    $ sudo apt-get install imagemagick
+    $ sudo apt-get install ghostscript
+    $ sudo apt-get install pdftk
+
+    Dockerfile
 
 ### macos
 
+    $ brew install bc
     $ brew install imagemagick
     $ brew install ghostscript
     $
@@ -53,4 +58,5 @@
     高さ(mm)  : 233
     OK(yes/no)[yes]
 
-縮小した表紙と余白カットした中身を結合して、yyyy-mm-dd-HH-MM-SS.pdfが作成されます。
+縮小した表紙と余白カットした中身を結合して、output.pdfが作成されます。
+/opt

@@ -69,7 +69,7 @@ function read_number () {
 }
 
 function read_params () {
-    front_pdf=`read_filepath "表示pdf(ないときはENTER):" "(|.+[.]pdf)" `
+    front_pdf=`read_filepath "表紙pdf(ないときはENTER):" "(|.+[.]pdf)" `
     body_pdf=` read_filepath "本文pdf:" ".+[.]pdf"`
     is_left_binding=`read_boolean "左綴じ(Yes|no)[Yes]:"  1`
     if [ $is_left_binding == 1 ]; then

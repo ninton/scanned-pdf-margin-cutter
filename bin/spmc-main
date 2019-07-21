@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eu
 
 dir=`dirname $0`
 
@@ -10,8 +10,8 @@ h=$5
 x=$6
 y=$7
 
-mkdir -p tmp
-rm -rf tmp/*
+#mkdir -p tmp
+#rm -rf tmp/*
 
 $dir/spmc-split 2 $pdf_2
 $dir/spmc-cut ${is_left_binding} $w $h $x $y
@@ -24,4 +24,4 @@ fi
 $dir/spmc-jpg2pdf
 $dir/spmc-join
 
-rm -rf tmp/*
+#rm -rf tmp/*
