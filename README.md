@@ -20,7 +20,10 @@
     $ sudo apt-get install ghostscript
     $ sudo apt-get install pdftk
 
-    Dockerfile
+    Ubuntu 18.04のpdftkは、pdfの読み込みで、Error: Unable to find file.となり、出力pdfを作成できませんでした。
+    そこで、dockerでubuntu16.04を動かして、その中で spmc-main-promptを動かしました。
+    docker-compose.ymlとDockerfileはこちらです。
+    [https://github.com/ninton/spmc-docker](https://github.com/ninton/spmc-docker)
 
 ### macos
 
