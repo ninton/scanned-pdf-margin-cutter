@@ -1,6 +1,6 @@
 {
   "name": "scanned-pdf-margin-cutter",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "(developing) Command line tool: Cut out margins from the image data of the scanned pdf",
   "main": "index.js",
   "scripts": {
